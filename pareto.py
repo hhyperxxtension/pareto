@@ -9,7 +9,7 @@ df = pd.read_csv('defects.csv')
 df = df.sort_values(by='Число дефектов', ascending=False).reset_index(drop=True)
 
 # Объединение редких дефектов в "Прочие" (увеличили top_n до 10 для показа большего количества столбцов)
-top_n = 10
+top_n = 5
 main_defects = df.iloc[:top_n]
 other_defects = df.iloc[top_n:]
 other_row = pd.DataFrame({
@@ -49,8 +49,8 @@ ax2.legend()
 
 # Добавление вертикальных разделителей для групп ABC
 # Находим позиции (индексы), где накопленный процент впервые превышает пороги
-a_end = df[df['Накопленный процент'] >= 80].index[0] + 0.5  # Граница A/B
-b_end = df[df['Накопленный процент'] >= 95].index[0] + 0.5  # Граница B/C
+a_end = df[df['Накопленный процент'] >= 60].index[0] + 0.5  # Граница A/B
+b_end = df[df['Накопленный процент'] >= 80].index[0] + 0.5  # Граница B/C
 
 # Рисуем вертикальные линии
 ax1.axvline(x=a_end, color='g', linestyle='--', label='Граница A/B')
